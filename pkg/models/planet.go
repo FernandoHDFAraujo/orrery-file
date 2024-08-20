@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/widget"
 	"github.com/FernandoHDFAraujo/orrery-file/utils"
@@ -19,7 +20,7 @@ type Planet struct {
 	LastUpdated time.Time
 }
 
-func DrawPlanet() []*widget.Card {
+func ReadPlanets() []fyne.CanvasObject {
 	err := godotenv.Load()
 
 	if err != nil {
@@ -34,12 +35,17 @@ func DrawPlanet() []*widget.Card {
 		return nil
 	}
 
-	var cards []*widget.Card
+	var c []*widget.Card
 	for _, file := range filesInDrive {
-		cards = append(cards, &widget.Card{
+		c = append(c, &widget.Card{
 			Title: filepath.Base(file.Name()),
 			Image: canvas.NewImageFromFile(utils.RetrievePlanetIcon(file.Name())),
 		})
+	}
+
+	var cards []fyne.CanvasObject
+	for _, card := range c {
+		cards = append(cards, card)
 	}
 
 	return cards

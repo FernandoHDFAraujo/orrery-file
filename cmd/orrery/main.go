@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"github.com/FernandoHDFAraujo/orrery-file/pkg/models"
@@ -9,16 +8,11 @@ import (
 
 func main() {
 	a := app.New()
-	w := a.NewWindow("Hello")
+	w := a.NewWindow("Orrery")
 
-	cards := models.DrawPlanet()
+	cards := models.ReadPlanets()
 
-	cardObjects := make([]fyne.CanvasObject, len(cards))
-	for i, card := range cards {
-		cardObjects[i] = card
-	}
-
-	grid := container.NewGridWithColumns(3, cardObjects...)
+	grid := container.NewGridWithColumns(3, cards...)
 
 	w.SetContent(grid)
 	w.ShowAndRun()
