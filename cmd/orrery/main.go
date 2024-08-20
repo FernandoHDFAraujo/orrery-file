@@ -3,14 +3,14 @@ package main
 import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
-	"github.com/FernandoHDFAraujo/orrery-file/pkg/models"
+	"github.com/FernandoHDFAraujo/orrery-file/pkg/ui/widgets"
 )
 
 func main() {
 	a := app.New()
 	w := a.NewWindow("Orrery")
 
-	cards := models.ReadPlanets()
+	cards := widgets.ArrangePlanets()
 
 	grid := container.NewGridWithColumns(3, cards...)
 

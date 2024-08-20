@@ -44,3 +44,7 @@ func RetrievePlanetIcon(path string) string {
 
 	return completePath
 }
+
+func retrieveIconFromSystem() {
+	//Logic for retrieving icons from the user's theme goes here
+}
