@@ -4,7 +4,9 @@ import (
 	"io/fs"
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
+	"runtime"
 
 	"github.com/joho/godotenv"
 )
@@ -63,6 +65,22 @@ func ReadPlanets() []fs.DirEntry {
 	}
 
 	return filesInDrive
+}
+
+func OpenFile(filePath string) {
+	var cmd *exec.Cmd
+
+	switch runtime.GOOS {
+	case "windows":
+		cmd = exec.Command("explorer", filePath)
+	default:
+		cmd = exec.Command("xdg-open", filePath)
+	}
+
+	err := cmd.Start()
+	if err != nil {
+		log.Printf("Failed to open file: %v", err)
+	}
 }
 
 func retrieveIconFromSystem() {
