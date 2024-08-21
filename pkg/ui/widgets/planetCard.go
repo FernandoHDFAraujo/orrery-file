@@ -7,12 +7,11 @@ import (
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"github.com/FernandoHDFAraujo/orrery-file/pkg/models"
 	"github.com/FernandoHDFAraujo/orrery-file/utils"
 )
 
 func ArrangePlanets() []fyne.CanvasObject {
-	filesInDrive := models.ReadPlanets()
+	filesInDrive := utils.ReadPlanets()
 
 	var cards []fyne.CanvasObject
 

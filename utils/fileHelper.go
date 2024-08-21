@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"io/fs"
+	"log"
 	"os"
 	"path/filepath"
 
@@ -43,6 +45,24 @@ func RetrievePlanetIcon(path string) string {
 	completePath := filepath.Join(baseAssetPath + iconPartialPath)
 
 	return completePath
+}
+
+func ReadPlanets() []fs.DirEntry {
+	err := godotenv.Load()
+
+	if err != nil {
+		log.Printf("Failed to read .env: %v", err)
+		return nil
+	}
+
+	filesInDrive, err := os.ReadDir(os.Getenv("NOTE_PATH"))
+
+	if err != nil {
+		log.Printf("Failed to read directory: %v", err)
+		return nil
+	}
+
+	return filesInDrive
 }
 
 func retrieveIconFromSystem() {
