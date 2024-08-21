@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"github.com/FernandoHDFAraujo/orrery-file/pkg/ui/widgets"
@@ -12,7 +13,12 @@ func main() {
 
 	cards := widgets.ArrangePlanets()
 
-	grid := container.NewGridWithColumns(3, cards...)
+	var canvasCards []fyne.CanvasObject
+	for _, card := range cards {
+		canvasCards = append(canvasCards, card.ObjectInCanvas)
+	}
+
+	grid := container.NewGridWithColumns(3, canvasCards...)
 
 	w.SetContent(grid)
 	w.ShowAndRun()

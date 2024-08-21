@@ -6,5 +6,5 @@ import (
 
 type Planet struct {
 	ObjectInCanvas fyne.CanvasObject
-	Path           string
+	Filepath       string
 }

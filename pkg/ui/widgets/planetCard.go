@@ -7,13 +7,14 @@ import (
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"github.com/FernandoHDFAraujo/orrery-file/pkg/models"
 	"github.com/FernandoHDFAraujo/orrery-file/utils"
 )
 
-func ArrangePlanets() []fyne.CanvasObject {
+func ArrangePlanets() []models.Planet {
 	filesInDrive := utils.ReadPlanets()
 
-	var cards []fyne.CanvasObject
+	var cards []models.Planet
 
 	for _, file := range filesInDrive {
 		img := canvas.NewImageFromFile(utils.RetrievePlanetIcon(file.Name()))
@@ -29,7 +30,10 @@ func ArrangePlanets() []fyne.CanvasObject {
 
 		card := widget.NewCard("", "", cardContent)
 
-		cards = append(cards, card)
+		cards = append(cards, models.Planet{
+			ObjectInCanvas: card,
+			Filepath:       file.Name(),
+		})
 	}
 
 	return cards
